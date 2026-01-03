@@ -1,10 +1,7 @@
 package com.Frag.EcomDemo.Models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +17,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Integer Id;
     private String name;
     private String description;
     private String brand;
@@ -30,6 +27,8 @@ public class Product {
     private Date releaseDate;
     private boolean productAvailable;
     private int stock;
-
-
+    private String imageName;
+    private String imageType;
+    @Lob
+    private byte[] imageData;
 }
