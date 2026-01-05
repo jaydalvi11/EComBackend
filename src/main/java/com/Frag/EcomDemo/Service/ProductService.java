@@ -29,4 +29,25 @@ public class ProductService {
 
         return productRepo.save(product);
     }
+
+    public Product updateProduct(int id, Product product, MultipartFile image) throws Exception {
+        Product existingProduct = productRepo.findById(id).orElseThrow(() -> new Exception("Product not found"));
+
+        existingProduct.setName(product.getName());
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setBrand(product.getBrand());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setCategory(product.getCategory());
+        existingProduct.setReleaseDate(product.getReleaseDate());
+        existingProduct.setProductAvailable(product.isProductAvailable());
+        existingProduct.setStock(product.getStock());
+
+        if (image != null && !image.isEmpty()) {
+            existingProduct.setImageName(image.getOriginalFilename());
+            existingProduct.setImageType(image.getContentType());
+            existingProduct.setImageData(image.getBytes());
+        }
+
+        return productRepo.save(existingProduct);
+    }
 }
