@@ -65,4 +65,14 @@ public class ProductController {
         }
     }
 
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable int id) {
+        try {
+            productService.deleteProduct(id);
+            return ResponseEntity.ok("Product deleted successfully");
+        } catch (RuntimeException re) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No matching product found");
+        }
+    }
+
 }
