@@ -50,4 +50,11 @@ public class ProductService {
 
         return productRepo.save(existingProduct);
     }
+
+    public void deleteProduct(int id) {
+        if (!productRepo.existsById(id)) {
+            throw new RuntimeException("Product not found.");
+        }
+        productRepo.deleteById(id);
+    }
 }
